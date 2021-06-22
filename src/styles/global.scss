@@ -1,0 +1,25 @@
+// font-family: 'Poppins', sans-serif;
+// font-family: 'Roboto', sans-serif;
+
+:root {
+  --color-background: #f8f8f8;
+  --color-font: #29292e;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: var(--color-font);
+  background: var(--color-background);
+}
+
+body,
+input,
+button,
+textarea {
+  font: 400 16px "Roboto", sans-serif;
+}
