@@ -1,3 +1,6 @@
+// Import Routes
+import { useHistory } from 'react-router';
+
 // Import Assets
 import logoImg from '../assets/images/logo.svg';
 import googleIconImg from '../assets/images/google-icon.svg';
