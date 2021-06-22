@@ -13,6 +13,12 @@ import { Button } from '../components/Button';
 import '../styles/auth.scss';
 
 export function Home() {
+  const history = useHistory();
+
+  function navigateToNewRoom() {
+    history.push('/rooms/new')
+  }
+  
   return (
     <div className="page-auth">
       <aside>
