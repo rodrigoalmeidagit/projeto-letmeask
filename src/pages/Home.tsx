@@ -1,6 +1,10 @@
 // Import Routes
 import { useHistory } from 'react-router';
 
+// Import Auth
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
+
 // Import Assets
 import logoImg from '../assets/images/logo.svg';
 import googleIconImg from '../assets/images/google-icon.svg';
