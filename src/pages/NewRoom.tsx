@@ -15,7 +15,10 @@ export function NewRoom() {
   return (
     <div className="page-auth">
       <aside>
-        <img src={illustrationImg} alt="Ilustração simbolizando perguntas e respostas" />
+        <img 
+          src={illustrationImg} 
+          alt="Ilustração simbolizando perguntas e respostas" 
+        />
         <strong>Toda pergunta tem <br />uma resposta.</strong>
         <p>Aprenda e compartilhe conhecimento <br />com outras pessoas</p>
       </aside>
