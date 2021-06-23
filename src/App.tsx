@@ -1,5 +1,5 @@
 // Import Routes
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 // Import Pages
 import { Home } from "./pages/Home";
