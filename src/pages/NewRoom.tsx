@@ -1,3 +1,6 @@
+// Import Routes
+import { Link } from 'react-router-dom';
+
 // Import Assets
 import logoImg from '../assets/images/logo.svg';
 import googleIconImg from '../assets/images/google-icon.svg';
