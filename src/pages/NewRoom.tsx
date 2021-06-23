@@ -21,7 +21,26 @@ import { Button } from '../components/Button';
 import '../styles/auth.scss';
 
 export function NewRoom() {
-  // const { user } = useAuth();
+  const { user } = useAuth();
+  const history = useHistory();
+  const [ newRoom, setNewRoom ] = useState('');
+  
+  async function handleCreateRoom( event: FormEvent) {
+    event.preventDefault();
+
+    if( newRoom.trim() === '' ) {
+      return;
+    }
+
+    const roomRef = dataBase.ref( 'rooms' );
+    const firebaseRoom = await roomRef.push( {
+      title: newRoom,
+      authorId: user?.id,
+    } );
+
+    history.push( `/rooms/${ firebaseRoom.key }` );
+  }
+
   return (
     <div className="page-auth">
       <aside>
