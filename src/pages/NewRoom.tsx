@@ -8,7 +8,7 @@ import { FormEvent, useState } from 'react';
 import { dataBase } from '../services/firebase';
 
 //Import Auth
-// import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../hooks/useAuth';
 
 // Import Assets
 import logoImg from '../assets/images/logo.svg';
