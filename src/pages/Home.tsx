@@ -18,9 +18,14 @@ import '../styles/auth.scss';
 
 export function Home() {
   const history = useHistory();
+  const { user, signInWithGoogle } = useContext( AuthContext );
 
-  function navigateToNewRoom() {
-    history.push('/rooms/new')
+  async function handleCreateRoom() {
+    if( !user ) {
+      await signInWithGoogle();
+    }
+
+    history.push( '/rooms/new' );
   }
   
   return (
