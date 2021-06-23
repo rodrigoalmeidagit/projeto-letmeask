@@ -1,9 +1,14 @@
+// Import Routes
 import { BrowserRouter, Route } from 'react-router-dom';
 
+// Import Pages
 import { Home } from "./pages/Home";
 import { NewRoom } from "./pages/NewRoom";
 
-function App() {
+// Import Context
+import { AuthContextProvider } from './contexts/AuthContext';
+
+function App() {  
   return (
     <BrowserRouter> 
       <AuthContextProvider>
