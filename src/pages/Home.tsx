@@ -1,6 +1,13 @@
 // Import Routes
 import { useHistory } from 'react-router';
 
+// Import React
+import { useState } from 'react';
+import { FormEvent } from 'react';
+
+// Import Firebase
+import { dataBase } from '../services/firebase';
+
 // Import Auth
 import { useAuth } from '../hooks/useAuth';
 
