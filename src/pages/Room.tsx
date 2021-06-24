@@ -47,6 +47,8 @@ export function Room() {
         <form>
           <textarea 
             placeholder="O que você quer perguntar?"
+            onChange={ event => setNewQuestion( event.target.value )}
+            value={ newQuestion }
           />
 
           <div className="form-footer">
