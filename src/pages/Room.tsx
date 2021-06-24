@@ -13,7 +13,7 @@ export function Room() {
       <header>
         <div className="content">
           <img src={ logoImg } alt="Logo Letmeask" />
-          <div>codigo</div>
+          <RoomCode />
         </div>
       </header>
 
