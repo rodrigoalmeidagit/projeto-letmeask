@@ -4,6 +4,9 @@ import logoImg from '../assets/images/logo.svg';
 // Import Components
 import { Button } from '../components/Button';
 
+// Import CSS Style
+import '../styles/room.scss';
+
 export function Room() {
   return(
     <div className="page-room">      
@@ -14,7 +17,7 @@ export function Room() {
         </div>
       </header>
 
-      <main className="content">      
+      <main>      
         <div className="room-title">
           <h1>Sala React</h1>
           <span>4 perguntas</span>
