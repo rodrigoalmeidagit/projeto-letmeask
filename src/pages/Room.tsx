@@ -3,6 +3,7 @@ import logoImg from '../assets/images/logo.svg';
 
 // Import Components
 import { Button } from '../components/Button';
+import { RoomCode } from '../components/RoomCode';
 
 // Import CSS Style
 import '../styles/room.scss';
