@@ -3,9 +3,9 @@ import { dataBase } from '../services/firebase';
 
 // Import Hook
 import { useAuth } from '../hooks/useAuth';
+import { useRoom } from '../hooks/useRoom';
 
 // Import React
-import { useEffect } from 'react';
 import { FormEvent, useState } from 'react';
 
 // Import React Router
@@ -20,30 +20,9 @@ import logoImg from '../assets/images/logo.svg';
 
 // Import CSS Style
 import '../styles/room.scss';
+import { Question } from '../components/Question';
 
 // TypeScript
-
-type FirebaseQuestions = Record<string, {
-  author: {
-    name: string;
-    avatar: string;
-  }
-  content: string;
-  isAnswered: boolean;
-  isHighLighted: boolean
-}>
-
-type Question = {
-  id: string;
-  author: {
-    name: string;
-    avatar: string;
-  }
-  content: string;
-  isAnswered: boolean;
-  isHighLighted: boolean
-}
-
 type RoomParams = {
   id: string;
 }
@@ -53,30 +32,7 @@ export function Room() {
   const roomId = params.id;
   const [ newQuestion, setNewQuestion ] = useState('');
   const { user } = useAuth();
-  const [ questions, setQuestion ] = useState<Question[]>( [] );
-  const [ title, setTitle ] = useState('');
-
-  useEffect( () => {
-    const roomRef = dataBase.ref( `rooms/${ roomId }` );
-
-    roomRef.on( 'value', room => {
-      const dataBaseRoom = room.val();
-      const fireBaseQuestions: FirebaseQuestions = dataBaseRoom.questions ?? {};
-      const parsedQuestions = Object.entries( fireBaseQuestions )
-        .map( ( [key, value] ) => {
-          return {
-            id: key,
-            content: value.content,
-            author: value.author,
-            isAnswered: value.isAnswered,
-            isHighLighted: value.isHighLighted
-          }
-        });
-
-      setTitle( dataBaseRoom.title );
-      setQuestion( parsedQuestions );
-    });
-  }, [ roomId ]);
+  const { questions, title } = useRoom( roomId );
 
   async function handleSendQuestion( event: FormEvent) {    
     event.preventDefault();
@@ -137,6 +93,19 @@ export function Room() {
             <Button type="submit" disabled={ !user }>Enviar pergunta</Button>
           </div>          
         </form>
+
+        <div className="question-list">
+          {questions.map( question => {
+          return (
+            <Question
+              // Consultar doc - algoritmo de reconciliação
+              key={ question.id } 
+              content={ question.content }
+              author={ question.author }            
+            />
+          );
+        } ) }
+        </div>
       </main>
     </div>
   );
