@@ -5,6 +5,7 @@ import { dataBase } from '../services/firebase';
 import { useAuth } from '../hooks/useAuth';
 
 // Import React
+import { useEffect } from 'react';
 import { FormEvent, useState } from 'react';
 
 // Import React Router
@@ -21,6 +22,28 @@ import logoImg from '../assets/images/logo.svg';
 import '../styles/room.scss';
 
 // TypeScript
+
+type FirebaseQuestions = Record<string, {
+  author: {
+    name: string;
+    avatar: string;
+  }
+  content: string;
+  isAnswered: boolean;
+  isHighLighted: boolean
+}>
+
+type Question = {
+  id: string;
+  author: {
+    name: string;
+    avatar: string;
+  }
+  content: string;
+  isAnswered: boolean;
+  isHighLighted: boolean
+}
+
 type RoomParams = {
   id: string;
 }
@@ -30,6 +53,30 @@ export function Room() {
   const roomId = params.id;
   const [ newQuestion, setNewQuestion ] = useState('');
   const { user } = useAuth();
+  const [ questions, setQuestion ] = useState<Question[]>( [] );
+  const [ title, setTitle ] = useState('');
+
+  useEffect( () => {
+    const roomRef = dataBase.ref( `rooms/${ roomId }` );
+
+    roomRef.on( 'value', room => {
+      const dataBaseRoom = room.val();
+      const fireBaseQuestions: FirebaseQuestions = dataBaseRoom.questions ?? {};
+      const parsedQuestions = Object.entries( fireBaseQuestions )
+        .map( ( [key, value] ) => {
+          return {
+            id: key,
+            content: value.content,
+            author: value.author,
+            isAnswered: value.isAnswered,
+            isHighLighted: value.isHighLighted
+          }
+        });
+
+      setTitle( dataBaseRoom.title );
+      setQuestion( parsedQuestions );
+    });
+  }, [ roomId ]);
 
   async function handleSendQuestion( event: FormEvent) {    
     event.preventDefault();
@@ -67,14 +114,14 @@ export function Room() {
 
       <main>      
         <div className="room-title">
-          <h1>Sala React</h1>
-          <span>4 perguntas</span>
+          <h1>Sala { title }</h1>
+          { questions.length > 0 && <span>{ questions.length } pergunta(s)</span>}
         </div>
 
         <form onSubmit={ handleSendQuestion }>
           <textarea 
             placeholder="O que você quer perguntar?"
-            onChange={ event => setNewQuestion( event.target.value )}
+            onChange={ event => setNewQuestion( event.target.value ) }
             value={ newQuestion }
           />
 
@@ -87,8 +134,6 @@ export function Room() {
             ) : (
               <span>Para enviar uma pergunta, <button>faça seu login</button>.</span>
             ) }
-
-            
             <Button type="submit" disabled={ !user }>Enviar pergunta</Button>
           </div>          
         </form>
