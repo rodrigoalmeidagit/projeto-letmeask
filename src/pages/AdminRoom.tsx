@@ -7,6 +7,7 @@ import { dataBase } from '../services/firebase';
 
 // Import React Router
 import { useParams } from 'react-router';
+import { useHistory } from 'react-router-dom';
 
 // Import Components
 import { Button } from '../components/Button';
@@ -27,10 +28,19 @@ type RoomParams = {
 }
 
 export function AdminRoom() {
+  const history = useHistory();
   const params = useParams<RoomParams>();
   const roomId = params.id;  
   // const { user } = useAuth();
   const { questions, title } = useRoom( roomId );
+
+  async function handleEndRoom() {
+    await dataBase.ref(`rooms/${roomId}`).update({
+      endedAt: new Date(),
+    })
+
+    history.push('/');
+  }
 
   async function handleDeleteQuestion( questionId: string ) {
     if(window.confirm('Tem certeza que você deseja excluir esta pergunta?')) {
@@ -45,7 +55,7 @@ export function AdminRoom() {
           <img src={ logoImg } alt="Logo Letmeask" />
           <div>
             <RoomCode code={ roomId } />
-            <Button isOutlined>Encerrar sala</Button>  
+            <Button isOutlined onClick={handleEndRoom}>Encerrar sala</Button>  
           </div>
         </div>
       </header>
