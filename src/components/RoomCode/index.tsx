@@ -1,8 +1,8 @@
 // Import Img
-import copyImg from '../assets/images/copy.svg';
+import copyImg from '/home/rodrigo/Workspace/projeto-letmeask/src/assets/images/copy.svg';
 
 // Import CSS Style
-import '../styles/room-code.scss';
+import '../RoomCode/style.scss';
 
 // TypeScript
 type RoomCodeProps = {
