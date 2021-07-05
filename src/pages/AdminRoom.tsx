@@ -15,7 +15,10 @@ import { RoomCode } from '../components/RoomCode';
 
 // Import Img
 import logoImg from '../assets/images/logo.svg';
-import deleteImg from '../assets/images/delete.svg'
+import deleteImg from '../assets/images/delete.svg';
+import checkImg from '../assets/images/check.svg';
+import answerImg from '../assets/images/answer.svg';
+
 
 // Import CSS Style
 import '../styles/room.scss';
